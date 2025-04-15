@@ -1,0 +1,46 @@
+<!-- templates/signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharma B2B Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="flex bg-white rounded-2xl shadow-lg w-3/4 max-w-5xl overflow-hidden">
+        <!-- Left panel -->
+        <div class="w-1/2 bg-blue-600 p-8 text-white flex flex-col items-center justify-center">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Pharma Logo" class="w-20 mb-6">
+            <h1 class="text-2xl font-bold mb-4">Join Pharma B2B</h1>
+            <p class="text-sm mb-6">Register to manage your pharma needs</p>
+            <div class="flex gap-4">
+                <a href="{{ url_for('home') }}" class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Login</a>
+                <a href="{{ url_for('signup') }}" class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="w-1/2 p-10">
+            <h2 class="text-2xl font-bold text-center mb-6">Sign Up</h2>
+            <form method="POST">
+                <div class="flex mb-4 space-x-4">
+                    <label class="flex items-center">
+                        <input type="radio" name="role" value="pharmacy" required class="mr-2">
+                        Pharmacy
+                    </label>
+                    <label class="flex items-center">
+                        <input type="radio" name="role" value="wholesaler" required class="mr-2">
+                        Wholesaler
+                    </label>
+                </div>
+                <input name="name" type="text" placeholder="Full Name" class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" required>
+                <input name="email" type="email" placeholder="Email" class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" required>
+                <input name="phone" type="text" placeholder="Phone Number" class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" required>
+                <input name="license_number" type="text" placeholder="License Number" class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" required>
+                <input name="password" type="password" placeholder="Create Password" class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" required>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

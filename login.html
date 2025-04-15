@@ -1,0 +1,83 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharma B2B Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="flex bg-white rounded-2xl shadow-lg w-3/4 max-w-5xl overflow-hidden">
+        
+        <!-- Left Panel -->
+        <div class="w-1/2 bg-blue-600 p-8 text-white flex flex-col items-center justify-center">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Pharma Logo" class="w-20 mb-6">
+            <h1 class="text-2xl font-bold mb-4">Welcome to Pharma B2B</h1>
+            <p class="text-sm mb-6">Login or Register to continue</p>
+            <div class="flex gap-4">
+                
+                <a href="{{ url_for('signup') }}" class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-100">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="w-1/2 p-10">
+            <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+            
+            <!-- Login Form -->
+            <form method="POST" action="{{ url_for('home') }}">
+                <!-- FIXED: Changed action to 'home' to match your Flask route -->
+
+                <!-- Role Dropdown -->
+                <select name="role" class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" required>
+                    <option disabled selected>Select Role</option>
+                    <option value="pharmacy">Pharmacy</option>
+                    <option value="wholesaler">Wholesaler</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <!-- Email Field -->
+                <input 
+                    name="email" 
+                    type="email" 
+                    placeholder="Email" 
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" 
+                    required
+                >
+
+                <!-- Password Field -->
+                <input 
+                    name="password" 
+                    type="password" 
+                    placeholder="Password" 
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4" 
+                    required
+                >
+
+                <!-- Extra Options -->
+                <div class="flex justify-between text-sm mb-4">
+                    <label><input type="checkbox" class="mr-1"> Remember me</label>
+                    <a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700"
+                >
+                    Login
+                </button>
+
+                <!-- Flash Message -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="text-red-600 text-sm mt-4">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>

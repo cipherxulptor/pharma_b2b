@@ -1,0 +1,41 @@
+<!-- pharmacy_analytics.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pharmacy Analytics</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="flex">
+    {% include 'pharmacy_sidebar.html' %}
+    <div class="flex-1 p-6">
+      <h1 class="text-3xl font-bold mb-4">Analytics</h1>
+      <canvas id="ordersChart" class="bg-white rounded shadow-md"></canvas>
+    </div>
+  </div>
+  <script>
+    const ctx = document.getElementById('ordersChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{ labels | safe }},
+        datasets: [{
+          label: 'Orders Over Time',
+          data: {{ values | safe }},
+          fill: true,
+          borderColor: 'rgb(59, 130, 246)',
+          backgroundColor: 'rgba(59, 130, 246, 0.2)',
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

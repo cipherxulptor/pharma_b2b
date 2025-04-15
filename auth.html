@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharma B2B - Auth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="flex bg-white shadow-lg rounded-2xl overflow-hidden w-full max-w-4xl">
+        
+        <!-- Left Side -->
+        <div class="w-1/2 bg-blue-600 text-white flex flex-col justify-center items-center p-8">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="w-20 h-20 mb-6">
+            <h1 class="text-3xl font-bold mb-2">Welcome to Pharma B2B</h1>
+            <p class="mb-6">Login or Register to continue</p>
+            <div class="space-x-4">
+                <button onclick="toggleForm('login')" class="bg-white text-blue-600 px-4 py-2 rounded font-semibold hover:bg-gray-100">Login</button>
+                <button onclick="toggleForm('signup')" class="bg-white text-blue-600 px-4 py-2 rounded font-semibold hover:bg-gray-100">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="w-1/2 p-8">
+            <form id="login-form">
+                <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+
+                <select class="w-full p-2 border rounded mb-4" required>
+                    <option value="" disabled selected>Select Role</option>
+                    <option value="pharmacy">Pharmacy</option>
+                    <option value="wholesaler">Wholesaler</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-4" required>
+                <input type="password" placeholder="Password" class="w-full p-2 border rounded mb-4" required>
+
+                <div class="flex justify-between items-center text-sm mb-4">
+                    <label><input type="checkbox" class="mr-1"> Remember me</label>
+                    <a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700">Login</button>
+            </form>
+
+            <form id="signup-form" class="hidden">
+                <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+
+                <div class="flex gap-4 mb-4">
+                    <label><input type="checkbox" name="role" value="pharmacy" onclick="toggleCheckbox(this)"> Pharmacy</label>
+                    <label><input type="checkbox" name="role" value="wholesaler" onclick="toggleCheckbox(this)"> Wholesaler</label>
+                </div>
+
+                <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4" required>
+                <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-4" required>
+                <input type="text" placeholder="Phone Number" class="w-full p-2 border rounded mb-4" required>
+                <input type="text" placeholder="License Number" class="w-full p-2 border rounded mb-4" required>
+                <input type="password" placeholder="Create Password" class="w-full p-2 border rounded mb-4" required>
+
+                <button type="submit" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(formType) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            if (formType === 'login') {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+            }
+        }
+
+        function toggleCheckbox(clicked) {
+            const checkboxes = document.querySelectorAll('input[name="role"]');
+            checkboxes.forEach(checkbox => {
+                if (checkbox !== clicked) checkbox.checked = false;
+            });
+        }
+    </script>
+
+</body>
+</html>

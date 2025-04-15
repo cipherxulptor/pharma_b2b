@@ -1,0 +1,37 @@
+<!-- pharmacy_orders.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pharmacy Orders</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="flex">
+    {% include 'pharmacy_sidebar.html' %}
+    <div class="flex-1 p-6">
+      <h1 class="text-3xl font-bold mb-4">My Orders</h1>
+      <table class="w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="py-3 px-4 text-left">Order ID</th>
+            <th class="py-3 px-4 text-left">Medicine</th>
+            <th class="py-3 px-4 text-left">Quantity</th>
+            <th class="py-3 px-4 text-left">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr class="border-t hover:bg-gray-100">
+            <td class="py-2 px-4">{{ order[0] }}</td>
+            <td class="py-2 px-4">{{ order[1] }}</td>
+            <td class="py-2 px-4">{{ order[2] }}</td>
+            <td class="py-2 px-4">{{ order[3] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
