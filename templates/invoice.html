@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Invoice</h1>
+
+        <table class="min-w-full bg-white rounded shadow">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">Product Name</th>
+                    <th class="py-2 px-4 border-b">Quantity</th>
+                    <th class="py-2 px-4 border-b">Price per Unit</th>
+                    <th class="py-2 px-4 border-b">Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total = 0 %}
+                {% for product in products %}
+                <tr>
+                    <td class="py-2 px-4 border-b">{{ product.product_name }}</td>
+                    <td class="py-2 px-4 border-b">{{ product.quantity }}</td>
+                    <td class="py-2 px-4 border-b">₹{{ product.price_per_unit }}</td>
+                    <td class="py-2 px-4 border-b">₹{{ product.total_price }}</td>
+                </tr>
+                {% set total = total + product.total_price %}
+                {% endfor %}
+                <tr class="font-bold">
+                    <td colspan="3" class="py-2 px-4 border-b text-right">Grand Total:</td>
+                    <td class="py-2 px-4 border-b">₹{{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

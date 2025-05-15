@@ -1,0 +1,35 @@
+<!-- pharmacy_inventory.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pharmacy Inventory</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="flex">
+    {% include 'pharmacy_sidebar.html' %}
+    <div class="flex-1 p-6">
+      <h1 class="text-3xl font-bold mb-4">Inventory</h1>
+      <table class="w-full bg-white shadow-md rounded-lg">
+        <thead class="bg-green-600 text-white">
+          <tr>
+            <th class="py-3 px-4 text-left">Medicine</th>
+            <th class="py-3 px-4 text-left">Quantity</th>
+            <th class="py-3 px-4 text-left">Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in inventory %}
+          <tr class="border-t hover:bg-gray-100">
+            <td class="py-2 px-4">{{ item[0] }}</td>
+            <td class="py-2 px-4">{{ item[1] }}</td>
+            <td class="py-2 px-4">{{ item[2] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

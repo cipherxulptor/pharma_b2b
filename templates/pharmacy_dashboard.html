@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pharmacy Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Top Navbar -->
+  <div class="bg-yellow-400 p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-white">Pharma B2B - Pharmacy Dashboard</h1>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Logout</button>
+  </div>
+
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-blue-600 text-white h-screen p-6 space-y-4">
+      <div class="text-center mb-8">
+        {% if user %}
+  <div class="text-2xl font-bold">Hello, {{ user[1] }}</div>
+{% else %}
+  <div class="text-2xl font-bold">Hello, Guest</div>
+{% endif %}
+
+        <p class="text-sm opacity-75">{{ user[3] }}</p>
+      </div>
+      <nav class="space-y-2">
+        <a href="/pharmacy/orders" class="block p-2 hover:bg-blue-700 rounded">Orders</a>
+        <a href="/pharmacy/inventory" class="block p-2 hover:bg-blue-700 rounded">Inventory</a>
+        <a href="/pharmacy/analytics" class="block p-2 hover:bg-blue-700 rounded">Analytics</a>
+        <a href="/pharmacy/catalog" class="block p-2 hover:bg-blue-700 rounded">View Catalog</a>
+
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded shadow p-4 text-center">
+          <p class="text-xl font-semibold text-gray-700">933</p>
+          <p class="text-sm text-gray-500">Total Orders</p>
+        </div>
+        <div class="bg-white rounded shadow p-4 text-center">
+          <p class="text-xl font-semibold text-gray-700">+48</p>
+          <p class="text-sm text-gray-500">New Orders</p>
+        </div>
+        <div class="bg-white rounded shadow p-4 text-center">
+          <p class="text-xl font-semibold text-gray-700">23</p>
+          <p class="text-sm text-gray-500">Pending</p>
+        </div>
+        <div class="bg-white rounded shadow p-4 text-center">
+          <p class="text-xl font-semibold text-green-600">✓</p>
+          <p class="text-sm text-gray-500">All Good</p>
+        </div>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="bg-white rounded shadow p-4">
+        <h2 class="text-2xl font-bold mb-4">My Orders</h2>
+        <table class="w-full table-auto border-collapse">
+          <thead>
+            <tr class="bg-gray-200 text-left">
+              <th class="p-2">Order ID</th>
+              <th class="p-2">Medicine</th>
+              <th class="p-2">Quantity</th>
+              <th class="p-2">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+            <tr class="border-b">
+              <td class="p-2">{{ order.id }}</td>
+              <td class="p-2">{{ order.medicine }}</td>
+              <td class="p-2">{{ order.quantity }}</td>
+              <td class="p-2">{{ order.status }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- Notifications Panel -->
+    <aside class="w-80 p-6 bg-white border-l hidden lg:block">
+      <h3 class="text-xl font-bold mb-4 text-gray-700">Notifications</h3>
+      <ul class="space-y-3 text-sm text-gray-600">
+        <li>🕑 2 min ago - New order received</li>
+        <li>🕑 1 hr ago - Inventory low: Paracetamol</li>
+        <li>🕑 3 hr ago - Invoice generated for Order #123</li>
+        <li>🕑 5 hr ago - New message from wholesaler</li>
+      </ul>
+    </aside>
+  </div>
+</body>
+</html>

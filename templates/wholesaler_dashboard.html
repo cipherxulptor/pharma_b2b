@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wholesaler Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 30px;
+            font-size: 22px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            background-color: #ecf0f1;
+        }
+
+        .welcome {
+            font-size: 24px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Wholesaler Panel</h2>
+    <a href="{{ url_for('wholesaler_inventory') }}">📦 Inventory</a>
+    <a href="{{ url_for('wholesaler_orders') }}">📝 Orders</a>
+    <a href="{{ url_for('wholesaler_analytics') }}">📊 Analytics</a>
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+</div>
+
+<div class="main-content">
+    <div class="welcome">
+        Welcome to your dashboard! Use the sidebar to navigate.
+    </div>
+</div>
+
+</body>
+</html>

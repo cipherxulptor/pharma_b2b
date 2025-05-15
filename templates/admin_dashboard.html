@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+    <h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
+
+    <h2 class="text-xl mb-4">All User Requests</h2>
+    <table class="w-full bg-white rounded-lg shadow-md overflow-hidden mb-10">
+        <thead class="bg-blue-600 text-white">
+            <tr>
+                <th class="py-3 px-4 text-left">Name</th>
+                <th class="py-3 px-4 text-left">Email</th>
+                <th class="py-3 px-4 text-left">Role</th>
+                <th class="py-3 px-4 text-left">Status</th>
+                <th class="py-3 px-4 text-left">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in all_users %}
+            <tr class="border-b">
+                <td class="py-3 px-4">{{ user[1] }}</td>
+                <td class="py-3 px-4">{{ user[2] }}</td>
+                <td class="py-3 px-4">{{ user[3] }}</td>
+                <td class="py-3 px-4">
+                    {% if user[4] == True %}
+                        <span class="text-green-600 font-semibold">Approved</span>
+                    {% elif user[4] == False %}
+                        <span class="text-red-600 font-semibold">Rejected</span>
+                    {% else %}
+                        <span class="text-yellow-500 font-semibold">Pending</span>
+                    {% endif %}
+                </td>
+                <td class="py-3 px-4">
+                    {% if user[4] is none %}
+                    <div class="flex gap-2">
+                        <form method="POST">
+                            <input type="hidden" name="user_id" value="{{ user[0] }}">
+                            <input type="hidden" name="action" value="approve">
+                            <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Approve</button>
+                        </form>
+                        <form method="POST">
+                            <input type="hidden" name="user_id" value="{{ user[0] }}">
+                            <input type="hidden" name="action" value="reject">
+                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Reject</button>
+                        </form>
+                    </div>
+                    
+                    {% else %}
+                        <span class="text-gray-500 italic">Action Completed</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

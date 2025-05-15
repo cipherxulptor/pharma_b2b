@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wholesaler Orders</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-2xl font-bold mb-4">Pending Pharmacy Orders</h1>
+
+    {% if orders %}
+        <div class="grid grid-cols-1 gap-4">
+            {% for order in orders %}
+                <div class="bg-white p-4 rounded shadow">
+                    <p><strong>Pharmacy Email:</strong> {{ order.user_email }}</p>
+                    <p><strong>Product:</strong> {{ order.product_name }}</p>
+                    <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+                    <p><strong>Price (per unit):</strong> ₹{{ order.price }}</p>
+                    <p><strong>Total Price:</strong> ₹{{ order.total_price }}</p>
+                    <form action="/approve_order/{{ order.id }}" method="post" class="inline">
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mt-2">Approve</button>
+                    </form>
+                    <form action="/reject_order/{{ order.id }}" method="post" class="inline ml-2">
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mt-2">Reject</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No pending orders.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pharmacy Catalog</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+  <div class="flex">
+    {% include 'pharmacy_sidebar.html' %}
+    <div class="flex-1 p-6">
+      <h1 class="text-3xl font-bold mb-4">View Catalog</h1>
+      
+      <!-- Catalog Table -->
+      <table class="w-full bg-white shadow-md rounded-lg">
+        <thead class="bg-purple-600 text-white">
+          <tr>
+            <th class="py-3 px-4 text-left">S.No</th>
+            <th class="py-3 px-4 text-left">Product Name</th>
+            <th class="py-3 px-4 text-left">Price</th>
+            <th class="py-3 px-4 text-left">Company</th>
+            <th class="py-3 px-4 text-left">Action</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in catalog %}
+          <tr class="border-t hover:bg-gray-100">
+            <td class="py-3 px-4">{{ item[0] }}</td>  <!-- ID -->
+            <td class="py-3 px-4">{{ item[1] }}</td>  <!-- Product Name -->
+            <td class="py-3 px-4">₹{{ item[2] }}</td> <!-- Price -->
+            <td class="py-3 px-4">{{ item[3] }}</td>  <!-- Company -->
+            
+            <td class="py-3 px-4">
+              <form action="/add_to_cart" method="POST" class="flex items-center space-x-2">
+                <input type="hidden" name="product_id" value="{{ item[4] }}">
+                <input type="number" name="quantity" min="10" required class="w-24 p-2 border rounded-lg" placeholder="Min: 10" />
+                <button type="submit" class="bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition">Add to Cart</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

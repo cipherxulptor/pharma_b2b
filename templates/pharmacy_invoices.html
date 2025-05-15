@@ -1,0 +1,46 @@
+<!-- templates/pharmacy_invoices.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Invoices</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <a href="{{ url_for('pharmacy_invoices') }}" class="block py-2 px-4 hover:bg-gray-200">My Invoices</a>
+
+</head>
+<body class="p-6 bg-gray-50">
+    <h1 class="text-2xl font-bold mb-4">Approved Orders / Invoices</h1>
+
+    <table class="min-w-full bg-white border border-gray-300 rounded shadow">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4">Medicine</th>
+                <th class="py-2 px-4">Quantity</th>
+                <th class="py-2 px-4">Unit Price</th>
+                <th class="py-2 px-4">Total Price</th>
+                <th class="py-2 px-4">Order Date</th>
+                <th class="py-2 px-4">Invoice</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for invoice in invoices %}
+            <tr class="text-center border-t">
+                <td class="py-2 px-4">{{ invoice.medicine }}</td>
+                <td class="py-2 px-4">{{ invoice.quantity }}</td>
+                <td class="py-2 px-4">₹{{ invoice.unit_price }}</td>
+                <td class="py-2 px-4 font-semibold">₹{{ invoice.total_price }}</td>
+                <td class="py-2 px-4">{{ invoice.order_date.strftime('%Y-%m-%d') }}</td>
+                <td class="py-2 px-4">
+                    <a href="{{ url_for('invoice', invoice_id=invoice.id) }}" class="text-blue-600 underline">View</a>
+                    |
+                    <a href="{{ url_for('download_invoice_pdf', invoice_id=invoice.id) }}" class="text-green-600 underline">Download</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="py-4 text-center text-gray-500">No approved orders yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
